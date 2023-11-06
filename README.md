@@ -1,5 +1,7 @@
 ## XMTP contracts
 
+[![Test](https://github.com/xmtp/contracts/actions/workflows/test.yml/badge.svg)](https://github.com/xmtp/contracts/actions/workflows/test.yml)
+
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
 Foundry consists of:
