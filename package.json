@@ -1,0 +1,42 @@
+{
+  "name": "postal_service_contract",
+  "version": "1.0.0",
+  "description": "XMTP postal service",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "contracts": "contracts",
+    "script": "script",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "forge build --sizes",
+    "prettier:check": "prettier --check \"(contracts|test|script)/**.sol\"",
+    "prettier:fix": "prettier --write \"(contracts|test|script)/**.sol\"",
+    "lint": "solhint contracts/**/*.sol test/**/*.sol script/**/*.sol",
+    "test": "forge test -vvv",
+    "clean": "forge cache clean && if [ -d out ]; then forge clean; fi"
+  },
+  "author": "XMTP",
+  "contributors": [
+    "John Cairns <john@xmtp.com>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xmtp/postal_service_contract.git"
+  },
+  "devDependencies": {
+    "solhint": "3.4.1",
+    "prettier": "2.8.8",
+    "prettier-plugin-solidity": "1.1.3"
+  },
+  "dependencies": {
+    "nvm": "0.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/xmtp/postal_service_contract/issues"
+  },
+  "homepage": "https://github.com/xmtp/postal_service_contract"
+}

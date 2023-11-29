@@ -1,63 +1,44 @@
-## XMTP contracts
+## XMTP Inbox
 
-[![Test](https://github.com/xmtp/contracts/actions/workflows/test.yml/badge.svg)](https://github.com/xmtp/contracts/actions/workflows/test.yml)
+[![Test](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This is the reference implementation of XMTP Inbox gateway contract.
 
-Foundry consists of:
+## Quick Start (Development)
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### Submodules
 
-## Documentation
+First, init submodules from the project root
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+$ git submodule update --recursive --init -f
 ```
 
-### Test
+### Dev Containers Development
 
-```shell
-$ forge test
+This contract supports containerized development. From Visual Studio Code Dev Containers extension
+
+`Reopen in Container`
+
+or
+
+Command line build using docker
+
+```bash
+$ docker build . -t postal_service_contract:1
 ```
 
-### Format
+## Testing the Contracts
 
-```shell
-$ forge fmt
+From the containerized environment:
+
+```bash
+$ yarn install --frozen-lockfile
+$ yarn prettier:check
+$ yarn lint
+$ forge test -vvv
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
 
 ### Help
 
