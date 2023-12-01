@@ -6,7 +6,7 @@ import {Inbox} from "../contracts/Inbox.sol";
 
 contract InboxTest is Test {
     Inbox public inbox;
-    event MessageSent(address indexed recipient, string cid);
+    event MessageSent(bytes32 recipient, string message);
 
     function setUp() public {
         inbox = new Inbox();
@@ -14,7 +14,7 @@ contract InboxTest is Test {
 
     function testSendMessage() public {
         vm.expectEmit(true, true, false, true);
-        emit MessageSent(address(0), "hi");
-        inbox.sendMessage(address(0), "hi");
+        emit MessageSent(0, "hi");
+        inbox.sendMessage(0, "hi");
     }
 }
