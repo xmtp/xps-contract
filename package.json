@@ -16,7 +16,11 @@
     "prettier:fix": "prettier --write \"(contracts|test|script)/**.sol\"",
     "lint": "solhint contracts/**/*.sol test/**/*.sol script/**/*.sol",
     "test": "forge test -vvv",
-    "clean": "forge cache clean && if [ -d out ]; then forge clean; fi"
+    "clean": "forge cache clean && if [ -d out ]; then forge clean; fi",
+    "dumpconversation": "forge script ./script/DeployConversation.s.sol --sig 'dumpConversation()'",
+    "dumpproxy": "forge script ./script/DeployConversation.s.sol --sig 'dumpProxy()'",
+    "conversationaddress": "cast create2 --starts-with 0x1D057 --deployer 0x4e59b44847b379578588920cA78FbF26c0B4956C --init-code $(cat Conversation.bin)",
+    "vanity": "cast create2 --starts-with 0x1D057 --ends-with 00 --deployer 0x4e59b44847b379578588920cA78FbF26c0B4956C --init-code $(cat MessageSenderProxy.bin)"
   },
   "author": "XMTP",
   "contributors": [

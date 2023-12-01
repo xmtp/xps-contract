@@ -11,7 +11,8 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "JuanBlanco.solidity"
+                "JuanBlanco.solidity",
+                "esbenp.prettier-vscode"
             ]
         }
     },
@@ -19,6 +20,7 @@
         "PRIVATE_KEY": "${localEnv:PRIVATE_KEY}",
         "PUBLIC_KEY": "${localEnv:PUBLIC_KEY}",
         "RPC_URL": "${localEnv:RPC_URL}",
+        "OPG_URL": "${localEnv:OPG_URL}",
         "ETHERSCAN_API_KEY": "${localEnv:ETHERSCAN_API_KEY}"
     }
     // Features to add to the dev container. More info: https://containers.dev/features.

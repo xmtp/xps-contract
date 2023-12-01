@@ -101,6 +101,81 @@
                 "kind": "test",
                 "isDefault": false
             }
-        }
+        },
+        {
+            "label": "dumpconversation",
+            "type": "shell",
+            "command": "yarn dumpconversation",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "dumpproxy",
+            "type": "shell",
+            "command": "yarn dumpproxy",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
+                    "CONVERSATION_ADDRESS": "0x1D057235C7d87b49b607E76830BB6f3483bCe4D9"
+                }
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "conversationaddress",
+            "type": "shell",
+            "command": "yarn conversationaddress",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "dumpconversation",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "vanity",
+            "type": "shell",
+            "command": "yarn vanity",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "dumpproxy",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "deployconversation",
+            "type": "shell",
+            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'deploy()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
+                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0x22A653801bB0bb85BE38765cC072144736635eE8",
+                    "CONTRACT_SALT": "0x746d52057bd7eb752a20ad1ffee51af1a8edb778f12886b05fd20dd24824e8fe",
+                    "CONVERSATION_SALT": "0xb5c5ee81d652d7a99041c5cc6dc330385338263843d23eeffd6687ca9594a7ab"
+                }
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+        },
     ]
 }

@@ -13,3 +13,6 @@ docs/
 
 # Dotenv file
 .env
+*.bin
+yarn-error.log
+broadcast/
