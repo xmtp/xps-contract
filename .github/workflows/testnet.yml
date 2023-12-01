@@ -1,0 +1,72 @@
+name: Testnet Deployment
+
+on:
+  push:
+    tags:
+      - "*"
+
+concurrency:
+  group: "testnet-deployment""
+  cancel-in-progress: true
+
+env:
+  RPC_URL: ${{ secrets.RPC_URL }}
+  OPG_URL: ${{ secrets.OPG_URL }}
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+  SEPOLIA_PROXY_ADDRESS: 0x15aE865d0645816d8EEAB0b7496fdd24227d1801
+  OP_GOERLI_PROXY_ADDRESS: 0x146Aa237567bEAa52C51570D2A2BC8150C63754B
+  RELEASE_TAG: ${{ github.ref_name }}
+
+jobs:
+  check:
+    strategy:
+      fail-fast: true
+
+    name: xps-contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Yarn install
+        run: |
+          yarn install --dev
+          yarn prettier:check
+          yarn hint
+          yarn install --production
+
+      - name: Run Forge tests
+        run: |
+          forge test -v --fail-fast
+        id: test
+
+      - name: GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          draft: false
+          prerelease: false
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          body_path: CHANGELOG.md
+
+      - name: Sepolia
+        run: |
+          forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify
+        env:
+          PROXY_ADDRESS: ${SEPOLIA_PROXY_ADDRESS}
+
+      - name: OP Görli
+        run: |
+          forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
+        env:
+          PROXY_ADDRESS: ${OP_GOERLI_PROXY_ADDRESS}
+

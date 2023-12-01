@@ -101,6 +101,39 @@
                 "kind": "test",
                 "isDefault": false
             }
-        }
+        },
+        {
+            "label": "deployconversation",
+            "type": "shell",
+            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'deploy()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
+                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0x22A653801bB0bb85BE38765cC072144736635eE8",
+                }
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+        },
+        {
+            "label": "upgradeconversation",
+            "type": "shell",
+            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PROXY_ADDRESS": "0x146Aa237567bEAa52C51570D2A2BC8150C63754B"
+                }
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+        },
     ]
 }
