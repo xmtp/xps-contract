@@ -12,9 +12,9 @@ contract InboxTest is Test {
         inbox = new Inbox();
     }
 
-    function testSendMessage() public {
+    function testSend() public {
         vm.expectEmit(true, true, false, true);
         emit MessageSent(0, "hi");
-        inbox.sendMessage(0, "hi");
+        inbox.send(0, "hi");
     }
 }
