@@ -1,4 +1,4 @@
-## XMTP Inbox
+## XMTP Inbox Contract
 
 [![Test](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml)
 

@@ -1,6 +1,6 @@
 FROM ghcr.io/xmtp/foundry:latest
 
-ARG PROJECT=postal_service_contract
+ARG PROJECT=xps-contract
 WORKDIR /workspaces/${PROJECT}
 
 RUN chown -R xmtp:xmtp /workspaces
