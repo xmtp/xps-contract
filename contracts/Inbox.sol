@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract Inbox {
-    event MessageSent(address indexed recipient, string cid);
+    event MessageSent(bytes32 indexed recipient, string message);
 
-    function sendMessage(address recipient, string memory cid) public payable {
-        emit MessageSent(recipient, cid);
+    function send(bytes32 recipient, string memory message) public payable {
+        emit MessageSent(recipient, message);
     }
 }

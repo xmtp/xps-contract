@@ -6,15 +6,15 @@ import {Inbox} from "../contracts/Inbox.sol";
 
 contract InboxTest is Test {
     Inbox public inbox;
-    event MessageSent(address indexed recipient, string cid);
+    event MessageSent(bytes32 indexed recipient, string message);
 
     function setUp() public {
         inbox = new Inbox();
     }
 
-    function testSendMessage() public {
+    function testSend() public {
         vm.expectEmit(true, true, false, true);
-        emit MessageSent(address(0), "hi");
-        inbox.sendMessage(address(0), "hi");
+        emit MessageSent(0, "hi");
+        inbox.send(0, "hi");
     }
 }
