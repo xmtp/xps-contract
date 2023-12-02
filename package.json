@@ -1,5 +1,5 @@
 {
-  "name": "postal_service_contract",
+  "name": "xps-contract",
   "version": "1.0.0",
   "description": "XMTP postal service",
   "main": "index.js",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:xmtp/postal_service_contract.git"
+    "url": "git@github.com:xmtp/xps-contract.git"
   },
   "devDependencies": {
     "solhint": "3.4.1",
@@ -36,7 +36,7 @@
     "nvm": "0.0.4"
   },
   "bugs": {
-    "url": "https://github.com/xmtp/postal_service_contract/issues"
+    "url": "https://github.com/xmtp/xps-contract/issues"
   },
-  "homepage": "https://github.com/xmtp/postal_service_contract"
+  "homepage": "https://github.com/xmtp/xps-contract"
 }

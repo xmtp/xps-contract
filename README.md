@@ -1,8 +1,8 @@
-## XMTP Inbox Contract
+## XMTP Postal Service (XPS) Inbox Contract
 
-[![Test](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/postal_service_contract/actions/workflows/ci-image.yml)
+[![Test](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml)
 
-This is the reference implementation of XMTP Inbox gateway contract.
+This is the reference implementation of XMTP Postal Service (XPS) inbox contract.
 
 ## Quick Start (Development)
 
@@ -25,7 +25,7 @@ or
 Command line build using docker
 
 ```bash
-$ docker build . -t postal_service_contract:1
+$ docker build . -t xps-contract:1
 ```
 
 ## Testing the Contracts
