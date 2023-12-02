@@ -6,7 +6,7 @@ import {Inbox} from "../contracts/Inbox.sol";
 
 contract InboxTest is Test {
     Inbox public inbox;
-    event MessageSent(bytes32 recipient, string message);
+    event MessageSent(bytes32 indexed recipient, string message);
 
     function setUp() public {
         inbox = new Inbox();
