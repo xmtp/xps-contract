@@ -39,7 +39,7 @@ jobs:
         run: |
           yarn install --dev
           yarn prettier:check
-          yarn hint
+          yarn lint
           yarn install --production
 
       - name: Run Forge tests
