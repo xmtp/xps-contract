@@ -1,13 +1,14 @@
 name: Testnet Deployment
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "*"
 
 concurrency:
   group: "testnet-deployment"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   RPC_URL: ${{ secrets.RPC_URL }}
@@ -60,13 +61,14 @@ jobs:
 
       - name: Sepolia
         run: |
+          echo "Upgrade ${PROXY_ADDRESS} to ${RELEASE_TAG}"
           forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify
         env:
           PROXY_ADDRESS: ${SEPOLIA_PROXY_ADDRESS}
 
       - name: OP Görli
         run: |
+          echo "Upgrade ${PROXY_ADDRESS} to ${RELEASE_TAG}"        
           forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
         env:
           PROXY_ADDRESS: ${OP_GOERLI_PROXY_ADDRESS}
-

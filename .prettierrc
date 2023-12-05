@@ -1,9 +1,4 @@
 {
-    "tabWidth": 2,
-    "printWidth": 120,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "semi": false,
     "plugins": [
         "prettier-plugin-solidity"
     ],
@@ -11,6 +6,7 @@
         {
             "files": "*.sol",
             "options": {
+                "printWidth": 120,
                 "tabWidth": 4,
                 "semi": true,
                 "singleQuote": false,
