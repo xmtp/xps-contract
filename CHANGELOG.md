@@ -2,3 +2,4 @@
 
 - initial project setup
 - proxy deployment
+- debug testnet.yml

@@ -1,7 +1,6 @@
 name: Testnet Deployment
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "*"
@@ -61,14 +60,10 @@ jobs:
 
       - name: Sepolia
         run: |
-          echo "Upgrade ${PROXY_ADDRESS} to ${RELEASE_TAG}"
-          forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify
-        env:
-          PROXY_ADDRESS: ${SEPOLIA_PROXY_ADDRESS}
+          echo "Upgrade ${SEPOLIA_PROXY_ADDRESS} to ${RELEASE_TAG}"
+          PROXY_ADDRESS=${SEPOLIA_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify
 
       - name: OP Görli
         run: |
-          echo "Upgrade ${PROXY_ADDRESS} to ${RELEASE_TAG}"        
-          forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
-        env:
-          PROXY_ADDRESS: ${OP_GOERLI_PROXY_ADDRESS}
+          echo "Upgrade ${OP_GOERLI_PROXY_ADDRESS} to ${RELEASE_TAG}"        
+          PROXY_ADDRESS=${OP_GOERLI_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
