@@ -6,7 +6,7 @@ on:
       - "*"
 
 concurrency:
-  group: "testnet-deployment""
+  group: "testnet-deployment"
   cancel-in-progress: true
 
 env:
