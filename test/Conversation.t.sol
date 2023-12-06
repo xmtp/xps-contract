@@ -16,9 +16,9 @@ import { createMessageSender } from "../contracts/MessageSenderProxy.sol";
 import { MessageSender } from "../contracts/MessageSender.sol";
 
 contract ConversationTest is Test {
-    event PayloadSent(bytes32 indexed conversation, bytes payload);
-
     address internal constant ROLE_ADMIN = address(0x45ee);
+
+    event PayloadSent(bytes32 indexed conversationId, bytes payload, uint256 lastChange);
 
     MessageSender public conversation;
 
@@ -30,8 +30,20 @@ contract ConversationTest is Test {
     function testSendMessage() public {
         bytes32 cid = keccak256("conversation");
         bytes memory expectMsg = "hello";
-        vm.expectEmit(true, true, false, true);
-        emit PayloadSent(cid, expectMsg);
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, 0);
+        conversation.sendMessage(cid, expectMsg);
+    }
+
+    function testSendMessageBlockNumber() public {
+        bytes32 cid = keccak256("conversation");
+        bytes memory expectMsg = "hello";
+        uint expectBlock = block.number;
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, 0);
+        conversation.sendMessage(cid, expectMsg);
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, expectBlock);
         conversation.sendMessage(cid, expectMsg);
     }
 

@@ -126,7 +126,7 @@
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "PROXY_ADDRESS": "0x146Aa237567bEAa52C51570D2A2BC8150C63754B"
+                    "PROXY_ADDRESS": "0x15aE865d0645816d8EEAB0b7496fdd24227d1801"
                 }
             },
             "dependsOn": "test",
