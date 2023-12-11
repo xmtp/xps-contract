@@ -16,6 +16,8 @@ env:
   ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
   SEPOLIA_PROXY_ADDRESS: "0x15aE865d0645816d8EEAB0b7496fdd24227d1801"
   OP_GOERLI_PROXY_ADDRESS: "0x146Aa237567bEAa52C51570D2A2BC8150C63754B"
+  OP_SEPOLIA_PROXY_ADDRESS: "0xAaCe07B4C163D2bCcA78237E1F863b6d20122762"
+  XMTP_L3_PROXY_ADDRESS: "0x34FE4677E581A57E9F9fe74948B0AbC8A4056f3F"
   RELEASE_TAG: ${{ github.ref_name }}
 
 jobs:
@@ -67,3 +69,13 @@ jobs:
         run: |
           echo "Upgrade ${OP_GOERLI_PROXY_ADDRESS} to ${RELEASE_TAG}"        
           PROXY_ADDRESS=${OP_GOERLI_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
+
+      - name: OP Sepolia
+        run: |
+          echo "Upgrade ${OP_SEPOLIA_PROXY_ADDRESS} to ${RELEASE_TAG}"        
+          PROXY_ADDRESS=${OP_SEPOLIA_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPS_URL} --private-key ${PRIVATE_KEY}
+
+      - name: XMTP Arbitrum L3
+        run: |
+          echo "Upgrade ${XMTP_L3_PROXY_ADDRESS} to ${RELEASE_TAG}"        
+          PROXY_ADDRESS=${XMTP_L3_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${XMTP_L3_URL} --private-key ${PRIVATE_KEY}

@@ -18,7 +18,7 @@ import { MessageSender } from "../contracts/MessageSender.sol";
 contract ConversationTest is Test {
     address internal constant ROLE_ADMIN = address(0x45ee);
 
-    event PayloadSent(bytes32 indexed conversationId, bytes payload, uint256 lastChange);
+    event PayloadSent(bytes32 indexed conversationId, bytes payload, uint256 lastMessage);
 
     MessageSender public conversation;
 
@@ -35,10 +35,11 @@ contract ConversationTest is Test {
         conversation.sendMessage(cid, expectMsg);
     }
 
-    function testSendMessageBlockNumber() public {
+    function testSendMessageLastMessageExpected() public {
         bytes32 cid = keccak256("conversation");
         bytes memory expectMsg = "hello";
         uint expectBlock = block.number;
+        assertTrue(expectBlock > 0);
         vm.expectEmit();
         emit PayloadSent(cid, expectMsg, 0);
         conversation.sendMessage(cid, expectMsg);

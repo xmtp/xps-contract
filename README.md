@@ -41,10 +41,12 @@ $ forge test -vvv
 
 ## TestNet Deployment
 
-| Contract     | Ethereum Address                           | Network                                                                                                   |
-| ------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
-| Conversation | 0x15aE865d0645816d8EEAB0b7496fdd24227d1801 | [Sepolia](https://sepolia.etherscan.io/address/0x15aE865d0645816d8EEAB0b7496fdd24227d1801)                |
-| Conversation | 0x146Aa237567bEAa52C51570D2A2BC8150C63754B | [Optimism Görli](https://goerli-optimism.etherscan.io/address/0x146aa237567beaa52c51570d2a2bc8150c63754b) |
+| Contract     | Ethereum Address                           | Network                                                                                                                                                      |
+| ------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Conversation | 0x15aE865d0645816d8EEAB0b7496fdd24227d1801 | [Sepolia](https://sepolia.etherscan.io/address/0x15aE865d0645816d8EEAB0b7496fdd24227d1801)                                                                   |
+| Conversation | 0xAaCe07B4C163D2bCcA78237E1F863b6d20122762 | [Optimisim Sepolia](https://sepolia-optimism.etherscan.io/address/0xAaCe07B4C163D2bCcA78237E1F863b6d20122762)                                                |
+| Conversation | 0x146Aa237567bEAa52C51570D2A2BC8150C63754B | @Deprecated [Optimism Görli](https://goerli-optimism.etherscan.io/address/0x146aa237567beaa52c51570d2a2bc8150c63754b)                                        |
+| Conversation | 0x34FE4677E581A57E9F9fe74948B0AbC8A4056f3F | (XMTP Sepolia Arbitrum L3)(https://explorerl2new-xmtp-l3-sepolia-arbitrum-anytr-x1nwrvmveu.t.conduit.xyz/address/0x34FE4677E581A57E9F9fe74948B0AbC8A4056f3F) |
 
 ### Help
 

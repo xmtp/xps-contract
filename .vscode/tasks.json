@@ -110,7 +110,7 @@
                 "cwd": "${workspaceFolder}",
                 "env": {
                     "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
-                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0x22A653801bB0bb85BE38765cC072144736635eE8",
+                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0x22A653801bB0bb85BE38765cC072144736635eE8"
                 }
             },
             "dependsOn": "test",

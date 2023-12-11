@@ -21,6 +21,8 @@
         "PUBLIC_KEY": "${localEnv:PUBLIC_KEY}",
         "RPC_URL": "${localEnv:RPC_URL}",
         "OPG_URL": "${localEnv:OPG_URL}",
+        "OPS_URL": "${localEnv:OPS_URL}",
+        "XMTP_L3_URL": "${localEnv:XMTP_L3_URL}",
         "ETHERSCAN_API_KEY": "${localEnv:ETHERSCAN_API_KEY}"
     }
     // Features to add to the dev container. More info: https://containers.dev/features.

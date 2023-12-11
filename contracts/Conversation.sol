@@ -13,7 +13,7 @@ import { MessageSender } from "./MessageSender.sol";
 contract Conversation is MessageSender, Initializable, UUPSUpgradeable, AccessControl {
     bytes32 public constant INBOX_ADMIN_ROLE = keccak256("INBOX_ADMIN_ROLE");
 
-    mapping(bytes32 => uint256) public lastChange;
+    mapping(bytes32 => uint256) public lastMessage;
 
     /// @dev constructor is forbidden for upgradeable contracts
     constructor() {
@@ -31,9 +31,9 @@ contract Conversation is MessageSender, Initializable, UUPSUpgradeable, AccessCo
      * @param payload the message payload
      */
     function sendMessage(bytes32 conversationId, bytes memory payload) external {
-        uint latest = lastChange[conversationId];
+        uint latest = lastMessage[conversationId];
         emit PayloadSent(conversationId, payload, latest);
-        lastChange[conversationId] = block.number;
+        lastMessage[conversationId] = block.number;
     }
 
     /**
