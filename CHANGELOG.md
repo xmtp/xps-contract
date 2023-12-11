@@ -1,7 +1,11 @@
+# 0.0.6 (2023-12-11)
+
+- fixing build issues
+
 # 0.0.5 (2023-12-11)
 
 - Support for last message published
-- deployment 
+- deployment
   - Op Sepolia
   - XMTP Arbitrum L3
 
