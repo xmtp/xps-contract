@@ -12,6 +12,8 @@ concurrency:
 env:
   RPC_URL: ${{ secrets.RPC_URL }}
   OPG_URL: ${{ secrets.OPG_URL }}
+  OPS_URL: ${{ secrets.OPS_URL }}
+  XMTP_L3_URL: ${{ secrets.XMTP_L3_URL }}}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
   ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
   SEPOLIA_PROXY_ADDRESS: "0x15aE865d0645816d8EEAB0b7496fdd24227d1801"
