@@ -1,6 +1,7 @@
-# 0.0.6 (2023-12-11)
+# 0.0.6.2 (2023-12-12)
 
 - fixing build issues
+- syntax error in deployment action
 
 # 0.0.5 (2023-12-11)
 
