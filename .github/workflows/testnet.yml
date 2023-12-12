@@ -80,4 +80,4 @@ jobs:
       - name: XMTP Arbitrum L3
         run: |
           echo "Upgrade ${XMTP_L3_PROXY_ADDRESS} to ${RELEASE_TAG}"
-          PROXY_ADDRESS=${XMTP_L3_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' -g 125 --slow --broadcast --rpc-url ${XMTP_L3_URL} --private-key ${PRIVATE_KEY}
+          GAS_MULTIPLIER=150 PROXY_ADDRESS=${XMTP_L3_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' -g ${GAS_MULTIPLIER} --slow --broadcast --rpc-url ${XMTP_L3_URL} --private-key ${PRIVATE_KEY}
