@@ -8,6 +8,9 @@ import { ERC1967Utils } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils
 import { MessageSender } from "./MessageSender.sol";
 import { Conversation } from "./Conversation.sol";
 
+/**
+ * @notice MessageSenderProxy is a proxy contract for sending messages to an inbox.
+ */
 contract MessageSenderProxy is ERC1967Proxy {
     constructor(
         address _logic,

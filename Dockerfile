@@ -15,3 +15,4 @@ RUN forge geiger --check contracts/*.sol
 RUN forge coverage
 
 USER xmtp
+ENV USER=xmtp
