@@ -8,6 +8,8 @@ This is the reference implementation of XMTP Postal Service (XPS) inbox contract
 
 ## Quick Start (Development)
 
+- [CONTRIBUTING](CONTRIBUTING.md)
+
 ### Submodules
 
 First, init submodules from the project root
