@@ -49,7 +49,9 @@ jobs:
 
       - name: Invoke Forge docgen
         run: |
-          forge doc --out ./_site
+          forge doc --out _site
+          mkdir -p _site/src/docs/
+          cp -r docs/ _site/src/docs/
         id: docgen
 
       - name: Upload artifact
