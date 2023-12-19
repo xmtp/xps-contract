@@ -8,6 +8,7 @@ This is the reference implementation of XMTP Postal Service (XPS) inbox contract
 
 ## Quick Start (Development)
 
+- [READ THE DOCS](https://xmtp.github.io/xps-contract)
 - [CONTRIBUTING](CONTRIBUTING.md)
 
 ### Submodules
