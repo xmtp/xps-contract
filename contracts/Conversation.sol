@@ -10,12 +10,6 @@ import { ERC165 } from "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 import { MessageSender } from "./MessageSender.sol";
 
-/**
- * @notice Conversation is a contract for sending messages to an inbox.   Each inbox
- * is identified by a conversationId.  The conversationId is a hash of the internal id
- * known to participants in a group chat.  The internal id is not known or shared in this
- * contract.
- */
 contract Conversation is MessageSender, Initializable, UUPSUpgradeable, AccessControl {
     bytes32 public constant INBOX_ADMIN_ROLE = keccak256("INBOX_ADMIN_ROLE");
 

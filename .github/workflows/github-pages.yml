@@ -53,10 +53,7 @@ jobs:
 
       - name: Invoke Forge docgen
         run: |
-          forge doc --out docs --build
-          mkdir -p _site/
-          cp -r docs/book/* _site/
-          cp -r xps.png CONTRIBUTING.md _site/
+          forge doc --out ./_site
         id: docgen
 
       - name: Upload artifact

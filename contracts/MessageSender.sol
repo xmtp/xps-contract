@@ -1,12 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @notice MessageSender is an interface for sending messages to an inbox.   Each inbox
- * is identified by a conversationId.  The conversationId is a hash of the internal id
- * known to participants in a group chat.  The internal id is not known or shared in this
- * contract.
- */
 interface MessageSender {
     /**
      * @notice emitted when a message is sent
