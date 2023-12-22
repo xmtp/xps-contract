@@ -20,6 +20,7 @@ contract Conversation is MessageSender, Initializable, UUPSUpgradeable, AccessCo
     bytes32 public constant INBOX_ADMIN_ROLE = keccak256("INBOX_ADMIN_ROLE");
 
     mapping(bytes32 => uint256) public lastMessage;
+    mapping(address => uint256) public nonce;
 
     /// @dev constructor is forbidden for upgradeable contracts
     constructor() {
@@ -36,10 +37,38 @@ contract Conversation is MessageSender, Initializable, UUPSUpgradeable, AccessCo
      * @param conversationId the conversation id
      * @param payload the message payload
      */
-    function sendMessage(bytes32 conversationId, bytes memory payload) external {
+    function sendMessage(bytes32 conversationId, bytes memory payload) public {
         uint latest = lastMessage[conversationId];
         emit PayloadSent(conversationId, payload, latest);
         lastMessage[conversationId] = block.number;
+    }
+
+    /**
+     * @notice send a message to the inbox, confirming the signed payload.
+     * @dev revert on signature validation failure
+     * @param conversationId the conversation id
+     * @param payload the message payload
+     * @param identity the identity of the signer
+     * @param sigV the signature V
+     * @param sigR the signature R
+     * @param sigS the signature S
+     */
+    function sendMessageSigned(
+        bytes32 conversationId,
+        bytes memory payload,
+        address identity,
+        uint8 sigV,
+        bytes32 sigR,
+        bytes32 sigS
+    ) external {
+        uint256 _nonce = nonce[identity];
+        bytes32 digest = keccak256(
+            abi.encodePacked(bytes1(0x19), bytes1(0), conversationId, payload, identity, _nonce)
+        );
+        address signer = ecrecover(digest, sigV, sigR, sigS);
+        if (signer != identity) revert SignatureValidationFailed(identity);
+        nonce[identity] = _nonce + 1;
+        sendMessage(conversationId, payload);
     }
 
     /**

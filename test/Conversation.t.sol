@@ -15,8 +15,26 @@ import { Conversation } from "../contracts/Conversation.sol";
 import { createMessageSender } from "../contracts/MessageSenderProxy.sol";
 import { MessageSender } from "../contracts/MessageSender.sol";
 
+/**
+ * @dev Convert bytes to uint256.  This is intended for test purposes only.
+ * @param _bytes Bytes to convert
+ * @return uint256
+ */
+function toUint256(bytes memory _bytes) pure returns (uint256) {
+    require(_bytes.length <= 32, "toUint256_outOfBounds");
+    uint256 result;
+    // solhint-disable-next-line no-inline-assembly
+    assembly {
+        result := mload(add(_bytes, 0x20))
+    }
+    return result;
+}
+
 contract ConversationTest is Test {
     address internal constant ROLE_ADMIN = address(0x45ee);
+
+    bytes internal constant PRIVATE_KEY = hex"a285ab66393c5fdda46d6fbad9e27fafd438254ab72ad5acb681a0e9f20f5d7b";
+    address internal constant SIGNER = 0x2036C6CD85692F0Fb2C26E6c6B2ECed9e4478Dfd;
 
     event PayloadSent(bytes32 indexed conversationId, bytes payload, uint256 lastMessage);
 
@@ -46,6 +64,56 @@ contract ConversationTest is Test {
         vm.expectEmit();
         emit PayloadSent(cid, expectMsg, expectBlock);
         conversation.sendMessage(cid, expectMsg);
+    }
+
+    function testSendMessageSigned() public {
+        Conversation _conversation = Conversation(address(conversation));
+        uint256 _nonce = _conversation.nonce(SIGNER);
+        bytes32 cid = keccak256("conversation");
+        bytes memory expectMsg = "hello";
+        (uint8 v, bytes32 r, bytes32 s) = signData(vm, cid, expectMsg, SIGNER, PRIVATE_KEY, _nonce);
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, 0);
+        conversation.sendMessageSigned(cid, expectMsg, SIGNER, v, r, s);
+    }
+
+    function testSendMessageSignedNonceUpdate() public {
+        Conversation _conversation = Conversation(address(conversation));
+        uint256 _startNonce = _conversation.nonce(SIGNER);
+        bytes32 cid = keccak256("conversation");
+        bytes memory expectMsg = "hello";
+        (uint8 v, bytes32 r, bytes32 s) = signData(vm, cid, expectMsg, SIGNER, PRIVATE_KEY, _startNonce);
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, 0);
+        conversation.sendMessageSigned(cid, expectMsg, SIGNER, v, r, s);
+        uint256 _nonce = _conversation.nonce(SIGNER);
+        (v, r, s) = signData(vm, cid, expectMsg, SIGNER, PRIVATE_KEY, _nonce);
+        vm.expectEmit();
+        emit PayloadSent(cid, expectMsg, block.number);
+        conversation.sendMessageSigned(cid, expectMsg, SIGNER, v, r, s);
+        assertNotEq(_nonce, _startNonce);
+    }
+
+    function testSendMessageSignedValidationFailure() public {
+        Conversation _conversation = Conversation(address(conversation));
+        uint256 _nonce = _conversation.nonce(SIGNER);
+        bytes32 cid = keccak256("conversation");
+        bytes memory expectMsg = "hello";
+        (uint8 v, bytes32 r, bytes32 s) = signData(vm, cid, expectMsg, SIGNER, PRIVATE_KEY, _nonce);
+        address badActor = address(0x123);
+        vm.expectRevert(abi.encodeWithSelector(MessageSender.SignatureValidationFailed.selector, badActor));
+        conversation.sendMessageSigned(cid, expectMsg, badActor, v, r, s);
+    }
+
+    function testSendMessageSignedNonceFailureReplay() public {
+        Conversation _conversation = Conversation(address(conversation));
+        uint256 _nonce = _conversation.nonce(SIGNER);
+        bytes32 cid = keccak256("conversation");
+        bytes memory expectMsg = "hello";
+        (uint8 v, bytes32 r, bytes32 s) = signData(vm, cid, expectMsg, SIGNER, PRIVATE_KEY, _nonce);
+        conversation.sendMessageSigned(cid, expectMsg, SIGNER, v, r, s);
+        vm.expectRevert(abi.encodeWithSelector(MessageSender.SignatureValidationFailed.selector, SIGNER));
+        conversation.sendMessageSigned(cid, expectMsg, SIGNER, v, r, s);
     }
 
     function testSupportsInterfaceIERC165() public {
@@ -151,5 +219,18 @@ contract ConversationTest is Test {
         Conversation _conversation = new Conversation();
         vm.expectRevert(abi.encodeWithSelector(Initializable.InvalidInitialization.selector));
         _conversation.initialize(address(0x123));
+    }
+
+    function signData(
+        VmSafe _vm,
+        bytes32 _cid,
+        bytes memory _payload,
+        address _identity,
+        bytes memory _privateKey,
+        uint256 _ownerNonce
+    ) internal pure returns (uint8 v, bytes32 r, bytes32 s) {
+        bytes32 digest = keccak256(abi.encodePacked(bytes1(0x19), bytes1(0), _cid, _payload, _identity, _ownerNonce));
+        (v, r, s) = _vm.sign(toUint256(_privateKey), digest);
+        return (v, r, s);
     }
 }

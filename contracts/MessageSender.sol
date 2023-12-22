@@ -16,12 +16,33 @@ interface MessageSender {
      */
     event PayloadSent(bytes32 indexed conversationId, bytes payload, uint256 lastMessage);
 
+    error SignatureValidationFailed(address identity);
+
     /**
      * @notice send a message to the inbox
      * @param conversationId the conversation id
      * @param payload the message payload
      */
     function sendMessage(bytes32 conversationId, bytes memory payload) external;
+
+    /**
+     * @notice send a message to the inbox, confirming the signed payload.
+     * @dev revert on signature validation failure
+     * @param conversationId the conversation id
+     * @param payload the message payload
+     * @param identity the identity of the signer
+     * @param sigV the signature V
+     * @param sigR the signature R
+     * @param sigS the signature S
+     */
+    function sendMessageSigned(
+        bytes32 conversationId,
+        bytes memory payload,
+        address identity,
+        uint8 sigV,
+        bytes32 sigR,
+        bytes32 sigS
+    ) external;
 
     /**
      * @notice get the latest message block number of this inbox for the conversation
