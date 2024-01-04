@@ -1,3 +1,7 @@
+# 0.0.7 (2024-01-04)
+
+- send message signed
+
 # 0.0.6.5 (2023-12-12)
 
 - fixing build issues

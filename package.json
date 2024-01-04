@@ -1,6 +1,6 @@
 {
   "name": "xps-contract",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "XMTP postal service",
   "main": "index.js",
   "directories": {
