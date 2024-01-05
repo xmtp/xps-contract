@@ -1,3 +1,7 @@
+# 0.0.8 (2024-01-05)
+
+- update contract details for XMTP L3
+
 # 0.0.7 (2024-01-04)
 
 - send message signed
