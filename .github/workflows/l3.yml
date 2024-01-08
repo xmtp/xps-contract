@@ -2,9 +2,8 @@ name: Testnet Deployment
 
 on:
   push:
-    branches: ["main"]
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    tags:
+      - "*"
 
 concurrency:
   group: "testnet-deployment"
@@ -29,7 +28,6 @@ jobs:
       fail-fast: true
 
     name: xps-contract
-    needs: ci-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +37,7 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly
+          version: nightly-fca0a6c5ed3576a692c2444ec459e0ee5321e3e5
 
       - name: Yarn install
         run: |
@@ -47,6 +45,11 @@ jobs:
           yarn prettier:check
           yarn lint
           yarn install --production
+
+      - name: Run Forge tests
+        run: |
+          forge test -v --fail-fast
+        id: test
 
       - name: XMTP Arbitrum L3
         run: |

@@ -19,7 +19,6 @@ concurrency:
 
 jobs:
   pagebuild:
-    needs: ci-image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

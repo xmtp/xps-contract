@@ -28,7 +28,6 @@ jobs:
       fail-fast: true
 
     name: xps-contract
-    needs: ci-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -78,7 +77,7 @@ jobs:
           echo "Upgrade ${OP_SEPOLIA_PROXY_ADDRESS} to ${RELEASE_TAG}"
           PROXY_ADDRESS=${OP_SEPOLIA_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPS_URL} --private-key ${PRIVATE_KEY}
 
-      - name: XMTP Arbitrum L3
-        run: |
-          echo "Upgrade ${XMTP_L3_PROXY_ADDRESS} to ${RELEASE_TAG}"
-          PROXY_ADDRESS=${XMTP_L3_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' -g 150 --slow --broadcast --rpc-url ${XMTP_L3_URL} --private-key ${PRIVATE_KEY}
+#      - name: XMTP Arbitrum L3
+#        run: |
+#          echo "Upgrade ${XMTP_L3_PROXY_ADDRESS} to ${RELEASE_TAG}"
+#          PROXY_ADDRESS=${XMTP_L3_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' -g 150 --slow --broadcast --rpc-url ${XMTP_L3_URL} --private-key ${PRIVATE_KEY}
