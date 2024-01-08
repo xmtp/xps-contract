@@ -2,8 +2,9 @@ name: Testnet Deployment
 
 on:
   push:
-    tags:
-      - "*"
+    branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 concurrency:
   group: "testnet-deployment"
@@ -46,37 +47,6 @@ jobs:
           yarn prettier:check
           yarn lint
           yarn install --production
-
-      - name: Run Forge tests
-        run: |
-          forge test -v --fail-fast
-        id: test
-
-      - name: GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          draft: false
-          prerelease: false
-          tag_name: ${{ github.ref_name }}
-          release_name: ${{ github.ref_name }}
-          body_path: CHANGELOG.md
-
-      - name: Sepolia
-        run: |
-          echo "Upgrade ${SEPOLIA_PROXY_ADDRESS} to ${RELEASE_TAG}"
-          PROXY_ADDRESS=${SEPOLIA_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify
-
-      - name: OP Görli
-        run: |
-          echo "Upgrade ${OP_GOERLI_PROXY_ADDRESS} to ${RELEASE_TAG}"
-          PROXY_ADDRESS=${OP_GOERLI_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPG_URL} --private-key ${PRIVATE_KEY}
-
-      - name: OP Sepolia
-        run: |
-          echo "Upgrade ${OP_SEPOLIA_PROXY_ADDRESS} to ${RELEASE_TAG}"
-          PROXY_ADDRESS=${OP_SEPOLIA_PROXY_ADDRESS} forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${OPS_URL} --private-key ${PRIVATE_KEY}
 
       - name: XMTP Arbitrum L3
         run: |

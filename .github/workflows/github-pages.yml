@@ -18,7 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  pagebuild:
+    needs: ci-image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
