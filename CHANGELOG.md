@@ -1,3 +1,7 @@
+# 0.0.9 (2024-01-08)
+
+- remove L3 deployment, not working in latest foundry see xps-contract/issues/18
+
 # 0.0.8 (2024-01-05)
 
 - update contract details for XMTP L3
