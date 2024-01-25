@@ -3,6 +3,7 @@
 ![XPS](xps.png)
 
 [![Test](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml)
+[![codecov](https://codecov.io/gh/xmtp/xps-contract/graph/badge.svg?token=6KAWWVK1BK)](https://codecov.io/gh/xmtp/xps-contract)
 
 This is the reference implementation of XMTP Postal Service (XPS) inbox contract.
 

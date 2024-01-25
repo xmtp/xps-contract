@@ -2,3 +2,4 @@ broadcast/
 node_modules/
 *.bin
 _site/
+lcov.info

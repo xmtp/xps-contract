@@ -18,3 +18,5 @@ docs/
 *.json
 yarn-error.log
 broadcast/
+
+lcov.info
