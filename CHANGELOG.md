@@ -1,3 +1,7 @@
+# 0.0.10 (2024-02-22)
+
+- vanity deployment
+
 # 0.0.9 (2024-01-08)
 
 - remove L3 deployment, not working in latest foundry see xps-contract/issues/18

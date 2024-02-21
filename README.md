@@ -47,12 +47,19 @@ $ forge test -vvv
 
 ## TestNet Deployment
 
-| Contract     | Ethereum Address                           | Network                                                                                                                                                      |
-| ------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Conversation | 0x15aE865d0645816d8EEAB0b7496fdd24227d1801 | [Sepolia](https://sepolia.etherscan.io/address/0x15aE865d0645816d8EEAB0b7496fdd24227d1801)                                                                   |
-| Conversation | 0xAaCe07B4C163D2bCcA78237E1F863b6d20122762 | [Optimisim Sepolia](https://sepolia-optimism.etherscan.io/address/0xAaCe07B4C163D2bCcA78237E1F863b6d20122762)                                                |
-| Conversation | 0x146Aa237567bEAa52C51570D2A2BC8150C63754B | @Deprecated [Optimism Görli](https://goerli-optimism.etherscan.io/address/0x146aa237567beaa52c51570d2a2bc8150c63754b)                                        |
-| Conversation | 0xDcef550E7bd54018d86f63877b1E6B019682a1c0 | [XMTP Sepolia Arbitrum L3](https://explorerl2new-xps-l3-sepolia-arbitrum-anytru-yk5h2umn72.t.conduit.xyz/address/0xDcef550E7bd54018d86f63877b1E6B019682a1c0) |
+| Contract     | Ethereum Address                           | Network                                                                                                               |
+| ------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Conversation | 0xD58349485CA7cdFabD8fD9ACb0855E6644f22600 | [Sepolia](https://sepolia.etherscan.io/address/0xD58349485CA7cdFabD8fD9ACb0855E6644f22600)                            |
+| Conversation | 0xD58349485CA7cdFabD8fD9ACb0855E6644f22600 | [Optimisim Sepolia](https://sepolia-optimism.etherscan.io/address/0xD58349485CA7cdFabD8fD9ACb0855E6644f22600)         |
+| Conversation | 0xD58349485CA7cdFabD8fD9ACb0855E6644f22600 | [Arbitrum Sepolia](https://sepolia.arbiscan.io/address/0xD58349485CA7cdFabD8fD9ACb0855E6644f22600)                    |
+| Conversation | 0x146Aa237567bEAa52C51570D2A2BC8150C63754B | @Deprecated [Optimism Görli](https://goerli-optimism.etherscan.io/address/0x146aa237567beaa52c51570d2a2bc8150c63754b) |
+
+### Deployment Information (Salt)
+
+| Contract           | Deployment Address                         | Salt                                                               | Version |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------------ | ------- |
+| Conversation       | 0xD583d590191766c6fA60533089D706bC608AaFeE | 0x580a76ade3c7f54205f87b842dd473037a795e2ed68bac1945fbbc26ac192799 | 0.0.10  |
+| MessageSenderProxy | 0xD58349485CA7cdFabD8fD9ACb0855E6644f22600 | 0x3e9ef0652552f6ec9f106e850fbbf108a1d800d8a7c34a64812804edb8e007eb | 0.0.10  |
 
 ### Sending Messages with a `MessageSender`
 

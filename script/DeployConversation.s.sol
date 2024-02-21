@@ -16,8 +16,10 @@ contract DeployConversation is Script {
         vm.startBroadcast();
         address _contractRoleAdmin = vm.envAddress("CONTRACT_ROLE_ADMIN");
         address[] memory _contractUpgradeAdmin = vm.envAddress("CONTRACT_ROLE_UPGRADE", ",");
-        Conversation logic = new Conversation();
-        MessageSenderProxy proxy = new MessageSenderProxy(address(logic), _contractRoleAdmin);
+        bytes32 _conversationSalt = vm.envBytes32("CONVERSATION_SALT");
+        bytes32 _vanitySalt = vm.envBytes32("CONTRACT_SALT");
+        Conversation logic = new Conversation{ salt: _conversationSalt }();
+        MessageSenderProxy proxy = new MessageSenderProxy{ salt: _vanitySalt }(address(logic), _contractRoleAdmin);
         address proxyAddress = address(proxy);
         Conversation conversation = Conversation(proxyAddress);
         for (uint256 i = 0; i < _contractUpgradeAdmin.length; i++) {
@@ -38,5 +40,28 @@ contract DeployConversation is Script {
         Conversation proxy = Conversation(_proxyAddress);
         proxy.upgradeToAndCall(address(logic), "");
         vm.stopBroadcast();
+    }
+
+    /**
+     * @notice - save the bytecode for Conversation to a file
+     * @dev requires fs_permissions
+     */
+    function dumpConversation() external {
+        bytes memory createCode = abi.encodePacked(type(Conversation).creationCode);
+        vm.writeFile("./Conversation.bin", vm.toString(createCode));
+    }
+
+    /**
+     * @notice - save the bytecode for MessageSenderProxy to a file
+     * @dev requires fs_permissions
+     */
+    function dumpProxy() external {
+        address _contractRoleAdmin = vm.envAddress("CONTRACT_ROLE_ADMIN");
+        address _conversationAddress = vm.envAddress("CONVERSATION_ADDRESS");
+        bytes memory createCode = abi.encodePacked(
+            type(MessageSenderProxy).creationCode,
+            abi.encode(_conversationAddress, _contractRoleAdmin)
+        );
+        vm.writeFile("./MessageSenderProxy.bin", vm.toString(createCode));
     }
 }

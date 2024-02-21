@@ -103,14 +103,72 @@
             }
         },
         {
-            "label": "deployconversation",
+            "label": "dumpconversation",
             "type": "shell",
-            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'deploy()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
+            "command": "yarn dumpconversation",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "dumpproxy",
+            "type": "shell",
+            "command": "yarn dumpproxy",
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
                     "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
-                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0xdFf04a062333260C4bFC0dC76f165e66dD5E36fa"
+                    "CONVERSATION_ADDRESS": "0xD583d590191766c6fA60533089D706bC608AaFeE"
+                }
+            },
+            "dependsOn": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "conversationaddress",
+            "type": "shell",
+            "command": "yarn conversationaddress",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "dumpconversation",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "vanity",
+            "type": "shell",
+            "command": "yarn vanity",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "dumpproxy",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "deployconversation",
+            "type": "shell",
+            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'deploy()' -g200 --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "CONTRACT_ROLE_ADMIN": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad",
+                    "CONTRACT_ROLE_UPGRADE": "0x6CEb0bF1f28ca4165d5C0A04f61DC733987eD6ad,0x22A653801bB0bb85BE38765cC072144736635eE8,0xdFf04a062333260C4bFC0dC76f165e66dD5E36fa",
+                    "CONTRACT_SALT": "0x3e9ef0652552f6ec9f106e850fbbf108a1d800d8a7c34a64812804edb8e007eb",
+                    "CONVERSATION_SALT": "0x580a76ade3c7f54205f87b842dd473037a795e2ed68bac1945fbbc26ac192799"
                 }
             },
             "dependsOn": "test",
@@ -122,11 +180,11 @@
         {
             "label": "upgradeconversation",
             "type": "shell",
-            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
+            "command": "forge script ./script/DeployConversation.s.sol:DeployConversation --sig 'upgrade()' -g200 --slow --broadcast --rpc-url ${RPC_URL} --private-key ${PRIVATE_KEY} --etherscan-api-key ${ETHERSCAN_API_KEY} --verify",
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "PROXY_ADDRESS": "0x15aE865d0645816d8EEAB0b7496fdd24227d1801"
+                    "PROXY_ADDRESS": "0xD58349485CA7cdFabD8fD9ACb0855E6644f22600"
                 }
             },
             "dependsOn": "test",
