@@ -1,6 +1,13 @@
-## XMTP Postal Service (XPS) Inbox Contract
+![Status](https://img.shields.io/badge/Deprecated-brown)
 
-![XPS](xps.png)
+> [!CAUTION]
+> This repo is no longer maintained.
+
+The documentation below is provided for historical reference only.
+
+---
+
+## XMTP Postal Service (XPS) Inbox Contract
 
 [![Test](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml/badge.svg)](https://github.com/xmtp/xps-contract/actions/workflows/ci-image.yml)
 [![codecov](https://codecov.io/gh/xmtp/xps-contract/graph/badge.svg?token=6KAWWVK1BK)](https://codecov.io/gh/xmtp/xps-contract)
